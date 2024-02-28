@@ -1,5 +1,6 @@
 package com.efrei.catalogmicroservice.service;
 
+import com.efrei.catalogmicroservice.config.Properties;
 import com.efrei.catalogmicroservice.exception.custom.ProductNotFoundException;
 import com.efrei.catalogmicroservice.exception.custom.WrongUserRoleException;
 import com.efrei.catalogmicroservice.model.Product;
@@ -14,8 +15,8 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    ProductRepository productRepository;
-    JwtUtils jwtUtils;
+    private final ProductRepository productRepository;
+    private final JwtUtils jwtUtils;
 
     public ProductServiceImpl(ProductRepository productRepository, JwtUtils jwtUtils) {
         this.productRepository = productRepository;

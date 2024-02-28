@@ -1,5 +1,6 @@
 package com.efrei.catalogmicroservice.utils;
 
+import com.efrei.catalogmicroservice.config.Properties;
 import com.efrei.catalogmicroservice.exception.custom.JWTException;
 import com.efrei.catalogmicroservice.exception.custom.WrongUserRoleException;
 import com.efrei.catalogmicroservice.model.UserRole;
@@ -16,9 +17,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class JwtUtils {
+    private final Properties properties;
+
+    public JwtUtils(Properties properties) {
+        this.properties = properties;
+    }
 
     public boolean validateJwt(String jwt, UserRole expectedRole) {
-        HttpsJwks httpsJkws = new HttpsJwks(" http://localhost:8080/public_key");
+        HttpsJwks httpsJkws = new HttpsJwks(properties.getJwkUrl());
 
         HttpsJwksVerificationKeyResolver httpsJwksKeyResolver = new HttpsJwksVerificationKeyResolver(httpsJkws);
 
