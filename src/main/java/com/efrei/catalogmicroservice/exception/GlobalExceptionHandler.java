@@ -17,7 +17,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(JWTException.class)
     protected ResponseEntity<Object> handleJWTException(
             JWTException ex, WebRequest request) {
-        String bodyOfResponse = ex.getMessage();
+        String bodyOfResponse = ex.getMessage() + "\n" + ex.getCause().toString();
         return handleExceptionInternal(ex, bodyOfResponse,
                 new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
