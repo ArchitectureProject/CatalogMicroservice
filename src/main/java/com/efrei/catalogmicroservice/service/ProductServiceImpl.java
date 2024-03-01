@@ -1,6 +1,5 @@
 package com.efrei.catalogmicroservice.service;
 
-import com.efrei.catalogmicroservice.config.Properties;
 import com.efrei.catalogmicroservice.exception.custom.ProductNotFoundException;
 import com.efrei.catalogmicroservice.exception.custom.WrongUserRoleException;
 import com.efrei.catalogmicroservice.model.Product;
@@ -52,6 +51,12 @@ public class ProductServiceImpl implements ProductService {
     public Product getProductById(String bearerToken, String productId) {
         return productRepository.findById(productId)
                 .orElseThrow(() -> new ProductNotFoundException("Product not found with id: " + productId));
+    }
+
+    @Override
+    public List<Product> getProductsByIds(String bearerToken, List<String> productIds) {
+        jwtUtils.validateJwt(bearerToken.substring(7), null);
+        return productRepository.findAllById(productIds);
     }
 
     @Override

@@ -37,6 +37,12 @@ public class ProductController {
         return productService.getProductById(bearerToken, id);
     }
 
+    @PostMapping("/productsByIds")
+    public List<Product> getProductsByIds(@RequestHeader(name = "Authorization") String bearerToken,
+                                         @RequestBody List<String> productsIds){
+        return productService.getProductsByIds(bearerToken, productsIds);
+    }
+
     @PutMapping("/set-available/{id}")
     public void setProductAvailable(@RequestHeader(name = "Authorization") String bearerToken,
                                     @PathVariable String id){

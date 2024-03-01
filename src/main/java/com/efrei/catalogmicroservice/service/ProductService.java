@@ -2,10 +2,6 @@ package com.efrei.catalogmicroservice.service;
 
 import com.efrei.catalogmicroservice.model.Product;
 import com.efrei.catalogmicroservice.model.dto.ProductToCreate;
-import org.jose4j.jwt.MalformedClaimException;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,6 +14,8 @@ public interface ProductService {
     List<Product> getAllAvailableProducts(String bearerToken);
 
     Product getProductById(String bearerToken, String productId);
+
+    List<Product> getProductsByIds(String bearerToken, List<String> productIds);
 
     void setProductUnavailable(String bearerToken, String productId);
 
