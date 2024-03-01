@@ -49,6 +49,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getProductById(String bearerToken, String productId) {
+        jwtUtils.validateJwt(bearerToken.substring(7), UserRole.AGENT);
         return productRepository.findById(productId)
                 .orElseThrow(() -> new ProductNotFoundException("Product not found with id: " + productId));
     }
