@@ -2,6 +2,7 @@ package com.efrei.catalogmicroservice.service;
 
 import com.efrei.catalogmicroservice.exception.custom.ProductNotFoundException;
 import com.efrei.catalogmicroservice.exception.custom.WrongUserRoleException;
+import com.efrei.catalogmicroservice.model.Catalog;
 import com.efrei.catalogmicroservice.model.Product;
 import com.efrei.catalogmicroservice.model.UserRole;
 import com.efrei.catalogmicroservice.model.dto.ProductToCreate;
@@ -23,7 +24,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product addProductToCatalog(String bearerToken, ProductToCreate productToCreate) {
+    public Product createProduct(String bearerToken, ProductToCreate productToCreate) {
         if(!jwtUtils.validateJwt(bearerToken.substring(7), UserRole.AGENT)){
             throw new WrongUserRoleException("User role does not gives him rights to call this endpoint");
         }
@@ -43,7 +44,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getAllAvailableProducts(String bearerToken) {
-        jwtUtils.validateJwt(bearerToken.substring(7), null);
+        jwtUtils.validateJwt(bearerToken.substring(7), UserRole.AGENT);
         return productRepository.findByAvailableTrue();
     }
 

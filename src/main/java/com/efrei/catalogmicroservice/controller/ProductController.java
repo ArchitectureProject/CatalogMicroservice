@@ -15,10 +15,10 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @PostMapping("/add-to-catalog")
-    public Product addProductToCatalog(@RequestHeader(name = "Authorization") String bearerToken,
-                                       @RequestBody ProductToCreate product){
-        return productService.addProductToCatalog(bearerToken, product);
+    @PostMapping("/product")
+    public Product createProduct(@RequestHeader(name = "Authorization") String bearerToken,
+                                 @RequestBody ProductToCreate product){
+        return productService.createProduct(bearerToken, product);
     }
 
     @GetMapping("/products")
@@ -26,8 +26,8 @@ public class ProductController {
         return productService.getAllProducts(bearerToken);
     }
 
-    @GetMapping("/catalog")
-    public List<Product> getCatalog(@RequestHeader(name = "Authorization") String bearerToken){
+    @GetMapping("/products/available")
+    public List<Product> getAllAvailableProducts(@RequestHeader(name = "Authorization") String bearerToken){
         return productService.getAllAvailableProducts(bearerToken);
     }
 
@@ -63,8 +63,8 @@ public class ProductController {
     }
 
     @DeleteMapping("/product/{id}")
-    public void DeleteMapping(@RequestHeader(name = "Authorization") String bearerToken,
-                                 @PathVariable String id){
+    public void deleteMapping(@RequestHeader(name = "Authorization") String bearerToken,
+                              @PathVariable String id){
         productService.deleteProduct(bearerToken, id);
     }
 

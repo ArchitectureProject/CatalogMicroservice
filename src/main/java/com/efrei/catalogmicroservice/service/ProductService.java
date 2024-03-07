@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ProductService {
 
-    Product addProductToCatalog(String bearerToken, ProductToCreate productToCreate);
+    Product createProduct(String bearerToken, ProductToCreate productToCreate);
 
     List<Product> getAllProducts(String bearerToken);
 

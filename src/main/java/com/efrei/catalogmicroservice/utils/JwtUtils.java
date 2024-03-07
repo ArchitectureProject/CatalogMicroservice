@@ -25,7 +25,6 @@ public class JwtUtils {
 
     public boolean validateJwt(String jwt, UserRole expectedRole) {
         HttpsJwks httpsJkws = new HttpsJwks(properties.getJwkUrl());
-        System.out.println(httpsJkws);
 
         HttpsJwksVerificationKeyResolver httpsJwksKeyResolver = new HttpsJwksVerificationKeyResolver(httpsJkws);
 
@@ -76,6 +75,4 @@ public class JwtUtils {
 
         return jwtRole.equals(expectedRole.toString());
     }
-
-
 }
